@@ -3,28 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import GamePreview from '../components/home/GamePreview';
 import { getAuthMe, getRoomByCode, startHostSsoLogin } from '../services/api';
 import styles from './HomePage.module.css';
 
 const HOST_LOGIN_INTENT_KEY = 'hostLoginIntent';
 
-function IconGame() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="5" width="20" height="14" rx="2" />
-      <line x1="8" y1="12" x2="12" y2="12" />
-      <line x1="10" y1="10" x2="10" y2="14" />
-      <circle cx="16" cy="11" r="1" fill="currentColor" stroke="none" />
-      <circle cx="18" cy="13" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 export default function HomePage() {
   const navigate = useNavigate();
   const [joinCode, setJoinCode] = useState('');
-  const [showPreview, setShowPreview] = useState(false);
   const [joinError, setJoinError] = useState('');
   const [joinLoading, setJoinLoading] = useState(false);
   const [hostLoading, setHostLoading] = useState(false);
@@ -129,22 +115,6 @@ export default function HomePage() {
             </Button>
           </div>
         </div>
-
-        <div className={styles.features}>
-          <button className={`${styles.featureCardBtn} ${showPreview ? styles.featureCardBtnActive : ''}`} onClick={() => setShowPreview(v => !v)}>
-            <span className={styles.featureIcon}><IconGame /></span>
-            <h3 className={styles.featureTitle}>Podgląd gry</h3>
-            <p className={styles.featureText}>
-              Gracze odpowiadają na pytania o sobie nawzajem. Najczęściej
-              wybierana odpowiedź zdobywa punkty. Śledź wyniki na tablicy na żywo.
-            </p>
-            <span className={styles.previewHint}>
-              {showPreview ? 'Ukryj demo ↑' : 'Zobacz demo ↓'}
-            </span>
-          </button>
-        </div>
-
-        {showPreview && <GamePreview />}
 
       </div>
     </PageLayout>

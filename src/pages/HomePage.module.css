@@ -69,16 +69,10 @@
 
 .features {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: var(--space-4);
   width: 100%;
-}
-
-.featureCard {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-6);
+  max-width: 480px;
 }
 
 .featureCardBtn {

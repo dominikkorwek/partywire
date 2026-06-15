@@ -123,15 +123,16 @@ interface AvatarDisplayProps {
   animalId: string;
   color: string;
   size?: number;
+  className?: string;
 }
 
-export function AvatarDisplay({ animalId, color, size = 48 }: AvatarDisplayProps) {
+export function AvatarDisplay({ animalId, color, size = 48, className = '' }: AvatarDisplayProps) {
   const animal = ANIMALS.find((a) => a.id === animalId) ?? ANIMALS[0];
   const padding = Math.round(size * 0.18);
 
   return (
     <div
-      className={styles.display}
+      className={[styles.display, className].filter(Boolean).join(' ')}
       style={{ width: size, height: size, background: color, padding }}
       aria-label={animal.label}
     >
@@ -151,7 +152,7 @@ export default function AvatarPicker({ value, onChange }: AvatarPickerProps) {
       <p className={styles.sectionLabel}>Twój awatar</p>
 
       <div className={styles.body}>
-        <AvatarDisplay animalId={value.animalId} color={value.color} size={64} />
+        <AvatarDisplay animalId={value.animalId} color={value.color} size={64} className={styles.previewDisplay} />
 
         <div className={styles.controls}>
           <div className={styles.animalGrid}>

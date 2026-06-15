@@ -12,6 +12,8 @@
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-4) var(--space-5);
+  width: 100%;
+  box-sizing: border-box;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -29,6 +31,11 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
+  min-width: 0;
+}
+
+.previewDisplay {
+  align-self: center;
 }
 
 .controls {
@@ -53,6 +60,7 @@
   cursor: pointer;
   color: var(--text-secondary);
   aspect-ratio: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,12 +107,37 @@
 }
 
 @media (max-width: 460px) {
+  .picker {
+    padding: var(--space-3);
+  }
+
   .body {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--space-3);
   }
 
   .animalGrid {
     grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-1);
+  }
+
+  .animalBtn {
+    padding: var(--space-1);
+  }
+
+  .previewDisplay {
+    width: 52px !important;
+    height: 52px !important;
+    padding: 9px !important;
+  }
+
+  .colorRow {
+    gap: 6px;
+  }
+
+  .colorSwatch {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout';
 import Button from '../components/ui/Button';
-import Card from '../components/ui/Card';
 import Input from '../components/ui/Input';
 import GamePreview from '../components/home/GamePreview';
 import { getAuthMe, getRoomByCode, startHostSsoLogin } from '../services/api';
@@ -18,17 +17,6 @@ function IconGame() {
       <line x1="10" y1="10" x2="10" y2="14" />
       <circle cx="16" cy="11" r="1" fill="currentColor" stroke="none" />
       <circle cx="18" cy="13" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function IconGroup() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="9" cy="7" r="3" />
-      <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
-      <circle cx="17" cy="8" r="2.5" />
-      <path d="M21 20c0-2.8-1.8-5-4-5.5" />
     </svg>
   );
 }
@@ -154,17 +142,6 @@ export default function HomePage() {
               {showPreview ? 'Ukryj demo ↑' : 'Zobacz demo ↓'}
             </span>
           </button>
-
-          <Card padded={false}>
-            <div className={styles.featureCard}>
-              <span className={styles.featureIcon}><IconGroup /></span>
-              <h3 className={styles.featureTitle}>Lobby wieloosobowe</h3>
-              <p className={styles.featureText}>
-                Udostępnij kod, link lub kod QR. Poczekaj, aż gracze dołączą. Host
-                startuje grę, gdy wszyscy są gotowi. Od 3 do 12 graczy.
-              </p>
-            </div>
-          </Card>
         </div>
 
         {showPreview && <GamePreview />}

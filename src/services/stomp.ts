@@ -9,6 +9,27 @@ type MessageCallback = (msg: RoomMessage) => void;
 
 let client: Client | null = null;
 let currentRoomCode: string | null = null;
+let heartbeatTimer: ReturnType<typeof setInterval> | null = null;
+
+function stopHeartbeat(): void {
+  if (heartbeatTimer) {
+    clearInterval(heartbeatTimer);
+    heartbeatTimer = null;
+  }
+}
+
+function sendHeartbeat(): void {
+  if (!client?.connected) return;
+  client.publish({ destination: '/app/heartbeat', body: '{}' });
+}
+
+function startHeartbeat(): void {
+  stopHeartbeat();
+  sendHeartbeat();
+  heartbeatTimer = setInterval(() => {
+    sendHeartbeat();
+  }, 10000);
+}
 
 export function connectRoom(
   roomCode: string,
@@ -40,7 +61,11 @@ export function connectRoom(
         body: JSON.stringify({ roomCode: currentRoomCode, playerId }),
       });
 
+      startHeartbeat();
       onConnected?.();
+    },
+    onWebSocketClose: () => {
+      stopHeartbeat();
     },
     onStompError: (frame) => {
       console.error('STOMP error', frame.headers['message']);
@@ -51,6 +76,7 @@ export function connectRoom(
 }
 
 export function disconnect(): void {
+  stopHeartbeat();
   client?.deactivate();
   client = null;
   currentRoomCode = null;

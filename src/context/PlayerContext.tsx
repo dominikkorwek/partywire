@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import { backendOrigin } from '../services/api';
 
 export interface AvatarConfig {
   animalId: string;
@@ -44,6 +45,38 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     sessionStorage.removeItem(STORAGE_KEY);
     setSessionState(null);
   }, []);
+
+  useEffect(() => {
+    if (!session) return;
+
+    const roomCode = session.roomCode;
+    const playerId = session.playerId;
+    const isHost = session.isHost;
+
+    const notifyExit = () => {
+      const url = isHost
+        ? `${backendOrigin()}/api/rooms/${encodeURIComponent(roomCode)}/close`
+        : `${backendOrigin()}/api/rooms/${encodeURIComponent(roomCode)}/leave`;
+
+      const body = isHost ? undefined : JSON.stringify({ playerId });
+
+      void fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        keepalive: true,
+        headers: body ? { 'Content-Type': 'application/json' } : undefined,
+        body,
+      }).catch(() => {});
+    };
+
+    window.addEventListener('pagehide', notifyExit);
+    window.addEventListener('beforeunload', notifyExit);
+
+    return () => {
+      window.removeEventListener('pagehide', notifyExit);
+      window.removeEventListener('beforeunload', notifyExit);
+    };
+  }, [session]);
 
   return (
     <PlayerContext.Provider value={{ session, setSession, clearSession }}>

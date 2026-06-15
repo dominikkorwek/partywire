@@ -28,7 +28,7 @@ function startHeartbeat(): void {
   sendHeartbeat();
   heartbeatTimer = setInterval(() => {
     sendHeartbeat();
-  }, 10000);
+  }, 5000);
 }
 
 export function connectRoom(

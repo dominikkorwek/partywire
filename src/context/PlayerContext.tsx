@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
-import { backendOrigin } from '../services/api';
+import { backendOrigin, heartbeatPresence } from '../services/api';
 
 export interface AvatarConfig {
   animalId: string;
@@ -51,20 +51,20 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
 
     const roomCode = session.roomCode;
     const playerId = session.playerId;
-    const isHost = session.isHost;
+    const heartbeat = () => {
+      void heartbeatPresence(roomCode, playerId).catch(() => {});
+    };
+    heartbeat();
+    const heartbeatId = window.setInterval(heartbeat, 5000);
 
     const notifyExit = () => {
-      const url = isHost
-        ? `${backendOrigin()}/api/rooms/${encodeURIComponent(roomCode)}/close`
-        : `${backendOrigin()}/api/rooms/${encodeURIComponent(roomCode)}/leave`;
-
-      const body = isHost ? undefined : JSON.stringify({ playerId });
+      const url = `${backendOrigin()}/api/rooms/${encodeURIComponent(roomCode)}/leave`;
+      const body = JSON.stringify({ playerId });
 
       void fetch(url, {
         method: 'POST',
-        credentials: 'include',
         keepalive: true,
-        headers: body ? { 'Content-Type': 'application/json' } : undefined,
+        headers: { 'Content-Type': 'application/json' },
         body,
       }).catch(() => {});
     };
@@ -73,6 +73,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     window.addEventListener('beforeunload', notifyExit);
 
     return () => {
+      window.clearInterval(heartbeatId);
       window.removeEventListener('pagehide', notifyExit);
       window.removeEventListener('beforeunload', notifyExit);
     };

@@ -72,6 +72,13 @@ export function leaveRoom(code: string, playerId: string): Promise<void> {
   });
 }
 
+export function heartbeatPresence(code: string, playerId: string): Promise<void> {
+  return request(`/api/rooms/${code}/presence`, {
+    method: 'POST',
+    body: JSON.stringify({ playerId }),
+  });
+}
+
 export function closeRoom(code: string): Promise<void> {
   return request(`/api/rooms/${code}/close`, {
     method: 'POST',

@@ -1,0 +1,77 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.empty {
+  opacity: 0.35;
+  border-style: dashed;
+}
+
+.kickBtn {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.kickBtn:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.hostStar {
+  font-style: normal;
+}
+
+.role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.onlineDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.waitingText {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.emptyAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}

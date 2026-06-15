@@ -1,0 +1,267 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: var(--space-8);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 1060px;
+  display: flex;
+  flex-direction: column;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.playerInfo {
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.aboutBadge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 3px 8px;
+  align-self: flex-start;
+}
+
+.playerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.playerAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.playerName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.playerSubtitle {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.questionText {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.tiebreakNotice {
+  font-size: 0.9rem;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+}
+
+.statusHint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: var(--space-2) 0;
+}
+
+.pendingAction {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.submittedAnswer {
+  background: var(--bg-surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.submittedLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.submittedText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.waitingMessage {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: var(--space-2);
+}
+
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+.answeredInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.answerDots {
+  display: flex;
+  gap: 4px;
+  margin-left: var(--space-1);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.sideSection {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sideTitle {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+
+.statusList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.statusDone {
+  background: #22c55e;
+}
+
+.statusActive {
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-subtle);
+}
+
+.statusPending {
+  background: transparent;
+  border: 1.5px solid var(--border);
+}
+
+.statusText {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.statusTextActive {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.statusTextMuted {
+  color: var(--text-muted);
+}
+
+.flowText {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: var(--space-4);
+  }
+
+  .columns {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}

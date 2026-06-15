@@ -1,0 +1,187 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: rgba(232, 99, 58, 0.12);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  align-self: flex-start;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sectionLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.answerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.answerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+}
+
+.answerLetter,
+.pickLetter {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.answerPreview {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.pickGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pickCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: left;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.pickCardActive {
+  border-color: var(--accent);
+  background: rgba(232, 99, 58, 0.08);
+}
+
+.pickCardActive .pickLetter {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.pickText {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.stepActions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.correctBtn {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.correctBtnActive {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.answerInput {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: var(--font);
+  outline: none;
+  padding: 4px 0;
+}
+
+.answerInput::placeholder {
+  color: var(--text-muted);
+}
+
+.existingQuestion {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+}
+
+.error {
+  font-size: 0.8rem;
+  color: #e05454;
+}
+
+@media (max-width: 540px) {
+  .answerGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,137 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.textarea {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  padding: var(--space-4);
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--transition);
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  border-color: var(--accent);
+}
+
+.textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.charCount {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.waiting {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.check {
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.waitLabel {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.votePrompt {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.voteList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.voteCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.voteCard:hover:not(:disabled) {
+  border-color: var(--text-muted);
+  background: var(--bg-elevated);
+}
+
+.voteCardSelected {
+  border-color: var(--accent) !important;
+  background: rgba(232, 99, 58, 0.08) !important;
+}
+
+.voteCardDimmed {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.voteCard:disabled {
+  cursor: not-allowed;
+}
+
+.voteCard:disabled.voteCardSelected {
+  opacity: 1;
+}
+
+.voteCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.voteAuthor {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.voteText {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.voteCheck {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.noAnswers {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--space-5);
+}

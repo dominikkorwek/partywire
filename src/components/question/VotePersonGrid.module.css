@@ -1,0 +1,79 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: var(--space-3);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-3);
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  position: relative;
+}
+
+.card:hover:not(:disabled) {
+  border-color: var(--text-muted);
+  background: var(--bg-elevated);
+}
+
+.selected {
+  border-color: var(--accent) !important;
+  background: rgba(232, 99, 58, 0.08) !important;
+}
+
+.dimmed {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.card:disabled.selected {
+  opacity: 1;
+  cursor: default;
+}
+
+.card:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.hostTag {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: rgba(232, 99, 58, 0.12);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+}

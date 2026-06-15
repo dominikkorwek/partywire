@@ -1,0 +1,84 @@
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-4);
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  white-space: nowrap;
+}
+
+.roundLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.typeLabel {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.roundTrack {
+  height: 3px;
+  width: 120px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.roundFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* center column stretches to fill the header grid middle cell */
+.timeTrack {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.timeFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+.timeFillLow {
+  background: #ef4444;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  white-space: nowrap;
+}
+
+.categoryLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.timeLeft {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.timeLeftLow {
+  color: #ef4444;
+}

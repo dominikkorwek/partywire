@@ -1,0 +1,145 @@
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: clamp(90px, 28vw, 140px);
+  flex-shrink: 0;
+}
+
+.winnerSlot {
+  
+}
+
+/* info area (above block) */
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding-bottom: var(--space-2);
+}
+
+.avatarWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.avatarWinner {
+  width: 56px;
+  height: 56px;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.crownBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.nameWinner {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.pts {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.ptsWinner {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* podium block */
+
+.block {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blockWinner {
+  background: rgba(249, 115, 22, 0.18);
+  border-color: var(--accent);
+}
+
+.placeLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.blockWinner .placeLabel {
+  color: var(--accent);
+}
+
+/* ── Place heights ── */
+
+.block1 { height: 100px; }
+.block2 { height: 70px; }
+.block3 { height: 50px; }
+
+
+@media (max-width: 480px) {
+  .block1 { height: 64px; }
+  .block2 { height: 44px; }
+  .block3 { height: 32px; }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .avatarWinner {
+    width: 46px;
+    height: 46px;
+  }
+
+  .crownBadge {
+    width: 18px;
+    height: 18px;
+    top: -6px;
+    right: -6px;
+  }
+
+  .name { font-size: 0.78rem; }
+  .nameWinner { font-size: 0.85rem; }
+  .pts, .ptsWinner { font-size: 0.72rem; }
+  .placeLabel { font-size: 0.85rem; }
+}

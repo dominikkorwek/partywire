@@ -7,6 +7,16 @@ import { getAuthMe, getRoomByCode, startHostSsoLogin } from '../services/api';
 import styles from './HomePage.module.css';
 
 const HOST_LOGIN_INTENT_KEY = 'hostLoginIntent';
+const AUTH_CHECK_TIMEOUT_MS = 1500;
+
+async function getAuthMeWithTimeout() {
+  return Promise.race([
+    getAuthMe(),
+    new Promise<null>((resolve) => {
+      window.setTimeout(() => resolve(null), AUTH_CHECK_TIMEOUT_MS);
+    }),
+  ]);
+}
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -18,9 +28,9 @@ export default function HomePage() {
   useEffect(() => {
     if (sessionStorage.getItem(HOST_LOGIN_INTENT_KEY) !== 'create-room') return;
     let cancelled = false;
-    getAuthMe()
+    getAuthMeWithTimeout()
       .then((auth) => {
-        if (cancelled || !auth.authenticated) return;
+        if (cancelled || !auth?.authenticated) return;
         sessionStorage.removeItem(HOST_LOGIN_INTENT_KEY);
         navigate('/create-room');
       })
@@ -31,8 +41,8 @@ export default function HomePage() {
   async function handleCreateRoom() {
     setHostLoading(true);
     try {
-      const auth = await getAuthMe();
-      if (auth.authenticated) {
+      const auth = await getAuthMeWithTimeout();
+      if (auth?.authenticated) {
         navigate('/create-room');
         return;
       }

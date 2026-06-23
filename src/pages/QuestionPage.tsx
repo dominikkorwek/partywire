@@ -41,6 +41,25 @@ function toScoreEntries(gs: GameStateResponse): ScoreEntry[] {
   }));
 }
 
+function roundPhaseKey(round: RoundResponse): string {
+  return [
+    round.id,
+    round.status,
+    round.tiebreakRevote ? 'tiebreak' : 'normal',
+    round.answerPhaseStartedAt ?? 'no-timer',
+  ].join(':');
+}
+
+function getRemainingTime(gs: GameStateResponse, round: RoundResponse): number {
+  if (!round.answerPhaseStartedAt) return gs.timePerAnswer;
+
+  const startedAt = new Date(round.answerPhaseStartedAt).getTime();
+  if (Number.isNaN(startedAt)) return gs.timePerAnswer;
+
+  const elapsedSeconds = Math.floor((Date.now() - startedAt) / 1000);
+  return Math.max(0, gs.timePerAnswer - elapsedSeconds);
+}
+
 export default function QuestionPage() {
   const navigate = useNavigate();
   const { session, clearSession } = usePlayer();
@@ -59,6 +78,7 @@ export default function QuestionPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const expiredPhaseKey = useRef<string | null>(null);
+  const activePhaseKey = useRef<string | null>(null);
 
   const handleMessage = useCallback(
     (msg: GameStateResponse | { event?: string }) => {
@@ -87,27 +107,43 @@ export default function QuestionPage() {
         return;
       }
 
-      if (round.status === 'WAITING_FOR_ANSWERS') {
+      const phaseKey = roundPhaseKey(round);
+      const phaseChanged = activePhaseKey.current !== phaseKey;
+      if (phaseChanged) {
+        activePhaseKey.current = phaseKey;
         expiredPhaseKey.current = null;
-        setTimeLeft(gs.timePerAnswer);
-        setTimerActive(true);
-        setSubmitted(false);
-        setSelectedOptionId(null);
-        setSelectedPersonId(null);
-        setFreeText('');
-        setSelectedVoteAnswerId(null);
+      }
+
+      if (round.status === 'WAITING_FOR_ANSWERS') {
+        if (phaseChanged) {
+          setTimeLeft(getRemainingTime(gs, round));
+          setTimerActive(true);
+          setSubmitted(false);
+          setSelectedOptionId(null);
+          setSelectedPersonId(null);
+          setFreeText('');
+          setSelectedVoteAnswerId(null);
+        }
       }
 
       if (round.status === 'REVEALING') {
-        expiredPhaseKey.current = null;
-        setTimeLeft(gs.timePerAnswer);
-        setTimerActive(true);
-        setSubmitted(false);
-        setSelectedVoteAnswerId(null);
+        if (phaseChanged) {
+          setTimeLeft(getRemainingTime(gs, round));
+          setTimerActive(true);
+          setSubmitted(false);
+          setSelectedVoteAnswerId(null);
+        }
       }
 
       if (round.status === 'WAITING_FOR_QUESTION') {
-        setTimerActive(false);
+        if (phaseChanged) {
+          setTimerActive(false);
+          setSubmitted(false);
+          setSelectedOptionId(null);
+          setSelectedPersonId(null);
+          setFreeText('');
+          setSelectedVoteAnswerId(null);
+        }
       }
     },
     [navigate, clearSession, playerId]

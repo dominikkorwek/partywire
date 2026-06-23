@@ -71,6 +71,7 @@ export interface RoundResponse {
   winningAnswer: AnswerResponse | null;
   answers: AnswerResponse[];
   tiebreakRevote: boolean;
+  answerPhaseStartedAt: string | null;
   playerAnswers: PlayerAnswerResponse[];
 }
 
